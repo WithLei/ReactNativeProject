@@ -631,56 +631,103 @@
 //   console.log("Running on Nougat!");
 // }
 
-import React from "react";
-import PropTypes from "prop-types";
-import { Button, NavigatorIOS, Text, View } from "react-native";
+// import React from "react";
+// import PropTypes from "prop-types";
+// import { Button, NavigatorIOS, Text, View } from "react-native";
+//
+// export default class NavigatorIOSApp extends React.Component {
+//   render() {
+//     return (
+//       <NavigatorIOS
+//         initialRoute={{
+//           component: MyScene,
+//           title: "My Initial Scene",
+//           passProps: { index: 1 }
+//         }}
+//         style={{ flex: 1 }}
+//       />
+//     );
+//   }
+// }
+//
+// class MyScene extends React.Component {
+//   static propTypes = {
+//     route: PropTypes.shape({
+//       title: PropTypes.string.isRequired
+//     }),
+//     navigator: PropTypes.object.isRequired
+//   };
+//
+//   constructor(props, context) {
+//     super(props, context);
+//     this._onForward = this._onForward.bind(this);
+//   }
+//
+//   _onForward() {
+//     let nextIndex = ++this.props.index;
+//     this.props.navigator.push({
+//       component: MyScene,
+//       title: "Scene " + nextIndex,
+//       passProps: { index: nextIndex }
+//     });
+//   }
+//
+//   render() {
+//     return (
+//       <View>
+//         <Text>Current Scene: {this.props.title}</Text>
+//         <Button
+//           onPress={this._onForward}
+//           title="Tap me to load the next scene"
+//         />
+//       </View>
+//     );
+//   }
+// }
 
-export default class NavigatorIOSApp extends React.Component {
+import React from 'react';
+import { Animated, Text, View } from 'react-native';
+
+class FadeInView extends React.Component {
+  state = {
+    fadeAnim: new Animated.Value(0),  // 透明度初始值设为0
+  }
+
+  componentDidMount() {
+    Animated.timing(                  // 随时间变化而执行动画
+      this.state.fadeAnim,            // 动画中的变量值
+      {
+        toValue: 1,                   // 透明度最终变为1，即完全不透明
+        duration: 10000,              // 让动画持续一段时间
+      }
+    ).start();                        // 开始执行动画
+  }
+
   render() {
+    let { fadeAnim } = this.state;
+
     return (
-      <NavigatorIOS
-        initialRoute={{
-          component: MyScene,
-          title: "My Initial Scene",
-          passProps: { index: 1 }
+      <Animated.View                 // 使用专门的可动画化的View组件
+        style={{
+          ...this.props.style,
+          opacity: fadeAnim,         // 将透明度指定为动画变量值
         }}
-        style={{ flex: 1 }}
-      />
+      >
+        {this.props.children}
+      </Animated.View>
     );
   }
 }
 
-class MyScene extends React.Component {
-  static propTypes = {
-    route: PropTypes.shape({
-      title: PropTypes.string.isRequired
-    }),
-    navigator: PropTypes.object.isRequired
-  };
-
-  constructor(props, context) {
-    super(props, context);
-    this._onForward = this._onForward.bind(this);
-  }
-
-  _onForward() {
-    let nextIndex = ++this.props.index;
-    this.props.navigator.push({
-      component: MyScene,
-      title: "Scene " + nextIndex,
-      passProps: { index: nextIndex }
-    });
-  }
-
+// 然后你就可以在组件中像使用`View`那样去使用`FadeInView`了
+export default class App extends React.Component {
   render() {
     return (
-      <View>
-        <Text>Current Scene: {this.props.title}</Text>
-        <Button
-          onPress={this._onForward}
-          title="Tap me to load the next scene"
-        />
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+          <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+        </FadeInView>
       </View>
-    );
+    )
   }
 }
