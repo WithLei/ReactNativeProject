@@ -735,20 +735,20 @@
 
 
 
-import React, { Component } from 'react';
-// import { NativeModules } from "react-native";
-// import ToastExample from "./ToastExample";
-import { Text } from 'react-native';
+// import React, { Component } from 'react';
+// // import { NativeModules } from "react-native";
+// // import ToastExample from "./ToastExample";
+// import { Text } from 'react-native';
+// //
+// export default class HelloWorldApp extends Component {
 //
-export default class HelloWorldApp extends Component {
-
- render() {
-   // 下一句中的ToastExample即对应上文
-   // public String getName()中返回的字符串
-   // module.exports = NativeModules.ToastExample;
-   // ToastExample.show("Awesome", ToastExample.SHORT);
-   return (
-     <Text>Hello world!</Text>
-   );
- }
-}
+//  render() {
+//    // 下一句中的ToastExample即对应上文
+//    // public String getName()中返回的字符串
+//    // module.exports = NativeModules.ToastExample;
+//    // ToastExample.show("Awesome", ToastExample.SHORT);
+//    return (
+//      <Text>Hello world!</Text>
+//    );
+//  }
+// }
