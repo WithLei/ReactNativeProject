@@ -9,7 +9,7 @@ function asyncF(name){
 
 function* fn(){
   console.log('test');
-  console.log('return' + yield asyncF('leo'));
+  console.log('return' + (yield asyncF('leo')));
 }
 
 let gf = fn();
