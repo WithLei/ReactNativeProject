@@ -10,9 +10,3 @@ Fn.prototype.getYear = function(){
 var s=new Fn();
 
 console.log(Fn(),s.name,s.getYear());
-
-
-
-
-
-// console.log(obj.s1);
