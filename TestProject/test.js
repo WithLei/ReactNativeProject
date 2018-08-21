@@ -1,12 +1,5 @@
 'use strict'
 
-function Fn(){
-  return 1989;
-};
-Fn.prototype.name = 'testName';
-Fn.prototype.getYear = function(){
-  return 1989;
-};
-var s=new Fn();
-
-console.log(Fn(),s.name,s.getYear());
+var arr = [1,2,3,4,5,6,7,8,9];
+arr.fill(10,2,5);
+console.log(arr);
