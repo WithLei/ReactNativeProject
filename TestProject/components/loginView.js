@@ -31,6 +31,11 @@ class loginView extends Component {
   //   }
   // }
 
+    constructor(props){
+      super(props);
+      this.state = {title : '首界面'};
+    }
+
     render() {
       return (
         <ImageBackground style={{height:height}}
@@ -61,9 +66,10 @@ class loginView extends Component {
                         </View>
                   </TouchableOpacity>
                   {/*
-                  <Text>{this.props.appName}</Text>
-                  <Text>{this.state.title}</Text>
+                  <Text> {this.props.appName}</Text>
+                  <Text> {this.state.title}</Text>
                   */}
+                  <Text style={styles.tv_login}> {this.state.title}</Text>
             </View>
        </ImageBackground>
     );
@@ -74,6 +80,14 @@ class loginView extends Component {
     ToastAndroid.show("A pikachu appeared nearby !", ToastAndroid.SHORT);
   }
 }
+
+loginView.defaultProps={
+  appName : '测试应用'
+};
+
+// loginView.state={
+//   title : '首界面',
+// };
 
 // // iOS和Android上都可用
 // Alert.alert(
