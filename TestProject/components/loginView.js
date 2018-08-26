@@ -11,10 +11,18 @@ import {
   ToastAndroid,
   Alert,
   TouchableOpacity,
+  YellowBox,
 } from 'react-native';
+
+import {
+  createStackNavigator,
+} from 'react-navigation';
 
 var Dimensions = require('Dimensions');
 var {width,height} = Dimensions.get('window');
+import Three from './Three'
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 class loginView extends Component {
   //不可更改元素
@@ -31,9 +39,15 @@ class loginView extends Component {
   //   }
   // }
 
-    constructor(props){
+  static navigationOptions = {
+    tabBarVisible: false, // 隐藏底部导航栏
+    header:null,  //隐藏顶部导航栏
+  };
+
+  constructor(props){
       super(props);
       this.state = {title : '首界面'};
+      this.btn_press = this.btn_press.bind(this);
     }
 
     render() {
@@ -76,14 +90,22 @@ class loginView extends Component {
   }
 
   btn_press(){
+    const {navigate} = this.props.navigation;
     console.log("onPressIn");
     ToastAndroid.show("A pikachu appeared nearby !", ToastAndroid.SHORT);
+    navigate('Profile','test');
   }
 }
 
 loginView.defaultProps={
   appName : '测试应用'
 };
+
+const App = createStackNavigator({
+  Home: { screen: loginView },
+  Profile: { screen: Three },
+});
+
 
 // loginView.state={
 //   title : '首界面',
@@ -153,4 +175,4 @@ const styles = StyleSheet.create({
 
 });
 
-module.exports = loginView;
+module.exports = App;
